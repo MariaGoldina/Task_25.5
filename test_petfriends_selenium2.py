@@ -61,7 +61,8 @@ def test_my_pets_table():
    # 1-я проверка:
    # Считаем количество питомцев в таблице и сравниваем с общим количеством из статистики пользователя
    total_count, names, breeds, ages = MyPetsTable().setup()
-   count_pets = len(pytest.driver.find_elements(By.XPATH, "//tbody/tr"))
+   count_pets = len(WebDriverWait(pytest.driver, timeout=10).until(EC.presence_of_all_elements_located((
+      By.XPATH, "//tbody/tr"))))
 
    try:
       assert count_pets == total_count
